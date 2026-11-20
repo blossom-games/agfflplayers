@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f8f8f6" />
   <title>Player Profiles</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fifaindex.com" crossorigin>
+  <link rel="preload" href="https://fifaindex.com/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fifaindex.com/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     :root {
       color-scheme: light;
@@ -1748,6 +1748,147 @@
     }
   </style>
 
+
+  <style id="fifa-index-font-and-stats">
+    @font-face {
+      font-family: "Instrument Sans";
+      src: url("https://fifaindex.com/fonts/instrument-sans-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Outfit";
+      src: url("https://fifaindex.com/fonts/outfit-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400 900;
+      font-display: swap;
+    }
+
+    body, button, input, .roster-panel, .team-panel, .player-meta,
+    .player-nickname, .description, .key-stat-label, .scale-note {
+      font-family: "Instrument Sans", Arial, sans-serif;
+    }
+    h1, .overall-value, .key-stat-value {
+      font-family: "Outfit", "Instrument Sans", Arial, sans-serif;
+    }
+    h1 {
+      font-weight: 650;
+      letter-spacing: -.035em;
+    }
+    .overall-block { text-align: center; }
+    .overall-value {
+      font-weight: 700;
+      letter-spacing: -.045em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .key-attributes-section {
+      padding: 14px 0 16px;
+    }
+    .stats-heading {
+      margin-bottom: 13px;
+    }
+    .stats-heading .section-title {
+      font-family: "Instrument Sans", Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: .015em;
+      text-transform: none;
+    }
+    .scale-note {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .key-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-rows: minmax(82px, auto);
+      column-gap: 18px;
+      row-gap: 16px;
+      align-items: stretch;
+    }
+    .key-stat {
+      min-width: 0;
+      min-height: 82px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 5px;
+      padding: 1px 8px 5px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      text-align: center;
+    }
+    .key-stat-value {
+      display: block;
+      width: 100%;
+      margin: 0;
+      color: var(--rating-color);
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -.035em;
+      line-height: 1;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .key-stat-label {
+      display: block;
+      width: 100%;
+      min-height: 14px;
+      margin: 0;
+      color: #65717a;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1.25;
+      text-align: center;
+      text-transform: none;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    .key-stat-meter {
+      width: 100%;
+      height: 4px;
+      margin-top: 3px;
+      overflow: hidden;
+      border-radius: 1px;
+      background: #edf0f2;
+    }
+    .key-stat-fill {
+      height: 100%;
+      border-radius: 1px;
+      background: var(--rating-color);
+    }
+
+    @media (max-width: 760px) {
+      .key-stats {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        column-gap: 8px;
+        row-gap: 14px;
+      }
+      .key-stat { padding-right: 4px; padding-left: 4px; }
+      .key-stat-value { font-size: 26px; }
+      .key-stat-label { font-size: 10px; }
+    }
+    @media (max-width: 430px) {
+      .key-stats {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        column-gap: 5px;
+        row-gap: 13px;
+      }
+      .key-stat { min-height: 76px; padding-right: 2px; padding-left: 2px; }
+      .key-stat-value { font-size: 23px; }
+      .key-stat-label { font-size: 9px; line-height: 1.2; }
+      .overall-block { text-align: center; }
+    }
+  </style>
+
 </head>
 <body>
   <main class="page" id="top">
@@ -1813,7 +1954,7 @@
 
       <section class="key-attributes-section" aria-labelledby="keyAttributesTitle">
         <div class="stats-heading">
-          <h2 class="section-title" id="keyAttributesTitle">Key attributes</h2>
+          <h2 class="section-title" id="keyAttributesTitle">Attributes</h2>
           <span class="scale-note">Ratings out of 100</span>
         </div>
         <div class="key-stats" id="keyStats" aria-label="Core player attribute ratings"></div>
@@ -2124,19 +2265,18 @@
         return true;
       }
 
+      // Keep all eight player ratings together: position-specific ratings first,
+      // followed by the six shared ratings. This creates a consistent 4 × 2 grid.
       let coreCount = 0;
-      for (const stat of coreStats) {
+      for (const stat of [...positionStats, ...coreStats]) {
         if (appendRating(keyStats, stat, "key")) coreCount++;
       }
 
-      let positionCount = 0;
-      for (const stat of positionStats) {
-        if (appendRating(detailStats, stat, "detail")) positionCount++;
-      }
+      // The separate position-attributes list is no longer needed; those ratings
+      // are displayed in the main grid above.
+      $("attributes").hidden = true;
 
-      $("attributes").hidden = positionCount === 0;
-
-      if (!coreCount && !positionCount) {
+      if (!coreCount) {
         const empty = document.createElement("div");
         empty.className = "empty-state";
         empty.textContent = "No ratings added for this player yet.";
