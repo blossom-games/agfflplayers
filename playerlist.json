@@ -1,0 +1,59 @@
+{
+  "players": [
+    {
+      "id": "player-001",
+      "name": "Jordan Example",
+      "position": "CB",
+      "overall": 92,
+      "image": "images/jordan-example.png",
+      "playerType": "standard",
+      "description": "A quick, physical corner who can stay with receivers in coverage and make plays on the ball. Replace this text with your own player description.",
+      "stats": {
+        "agility": 94,
+        "speed": 96,
+        "coverage": 93,
+        "jump": 88,
+        "awareness": 91,
+        "passRush": 67
+      }
+    },
+    {
+      "id": "player-002",
+      "name": "Alex Quarterback",
+      "position": "QB",
+      "overall": 95,
+      "image": "images/alex-quarterback.png",
+      "playerType": "qb",
+      "description": "Write a short description of this quarterback here. You can include play style, strengths, or anything else you want.",
+      "stats": {
+        "agility": 86,
+        "speed": 82,
+        "coverage": 45,
+        "jump": 72,
+        "awareness": 97,
+        "passRush": 38,
+        "armStrength": 98,
+        "accuracy": 95
+      }
+    },
+    {
+      "id": "player-003",
+      "name": "Taylor Receiver",
+      "position": "WR",
+      "overall": 91,
+      "image": "images/taylor-receiver.png",
+      "playerType": "wr",
+      "description": "Write your wide receiver description here.",
+      "stats": {
+        "agility": 93,
+        "speed": 97,
+        "coverage": 42,
+        "jump": 90,
+        "awareness": 85,
+        "passRush": 35,
+        "routeRunning": 94,
+        "catching": 92
+      }
+    }
+  ]
+}

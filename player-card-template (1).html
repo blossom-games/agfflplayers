@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f8f8f6" />
+  <title>Player Profiles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #f8f8f6;
+      --paper: #fff;
+      --ink: #171717;
+      --muted: #777873;
+      --line: #deded9;
+      --green: #13a34a;
+      --purple: #8050cc;
+      --purple-soft: #f2ecfb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 38px 24px 54px;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input { font: inherit; }
+    button:focus-visible, input:focus-visible {
+      outline: 3px solid rgba(128, 80, 204, .28);
+      outline-offset: 2px;
+    }
+
+    .page { width: min(1120px, 100%); margin: 0 auto; }
+
+    /* Roster controls sit above the original-style player card. */
+    .roster-panel {
+      margin-bottom: 16px;
+      padding: 17px 19px 13px;
+      background: var(--paper);
+      border: 1px solid #e8e8e3;
+    }
+
+    .roster-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 13px;
+    }
+
+    .roster-heading { min-width: 0; }
+    .roster-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -.025em;
+    }
+    .roster-subtitle {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .roster-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap { position: relative; }
+    .search-wrap::before {
+      content: "⌕";
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-55%);
+      color: #8b8b85;
+      font-size: 19px;
+      pointer-events: none;
+    }
+    .search-input {
+      width: 205px;
+      height: 36px;
+      padding: 0 12px 0 32px;
+      border: 1px solid #deded9;
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 12px;
+    }
+    .search-input::placeholder { color: #999a94; }
+
+    .utility-button, .step-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid #deded9;
+      border-radius: 4px;
+      background: #fff;
+      color: #343530;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .utility-button:hover, .step-button:hover:not(:disabled) {
+      background: #f5f3f8;
+      border-color: #c9b9e1;
+    }
+
+    .filter-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 0 0 11px;
+      border-bottom: 1px solid #e8e8e3;
+      scrollbar-width: thin;
+    }
+    .filter-tab {
+      flex: 0 0 auto;
+      min-height: 30px;
+      padding: 0 11px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      background: transparent;
+      color: #71726c;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .filter-tab:hover { background: #f6f5f3; color: #242520; }
+    .filter-tab[aria-selected="true"] {
+      border-color: #c9b2e9;
+      background: var(--purple-soft);
+      color: #5e369f;
+    }
+    .filter-count {
+      margin-left: 4px;
+      color: #979890;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .player-tabs-wrap {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding-top: 12px;
+    }
+    .player-tabs {
+      display: flex;
+      flex: 1 1 auto;
+      gap: 7px;
+      min-width: 0;
+      overflow-x: auto;
+      padding: 1px 1px 4px;
+      scrollbar-width: thin;
+      scroll-behavior: smooth;
+    }
+    .player-tab {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 7px;
+      min-height: 34px;
+      max-width: 230px;
+      padding: 0 10px;
+      border: 1px solid #e0e0db;
+      border-radius: 4px;
+      background: #fff;
+      color: #373832;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .player-tab:hover { border-color: #c9b9e1; background: #faf8fd; }
+    .player-tab[aria-selected="true"] {
+      border-color: #a980df;
+      background: var(--purple-soft);
+      color: #3f256c;
+    }
+    .player-tab-name { overflow: hidden; text-overflow: ellipsis; }
+    .player-tab-position {
+      color: #898a83;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+    .step-controls { display: flex; flex: 0 0 auto; gap: 5px; }
+    .step-button { width: 34px; padding: 0; font-size: 18px; }
+    .step-button:disabled { opacity: .35; cursor: default; }
+
+    .roster-status {
+      min-height: 16px;
+      margin: 7px 1px 0;
+      color: #8a8b84;
+      font-size: 11px;
+    }
+    .roster-status.error { color: #b44242; }
+    .file-input { display: none; }
+
+    .player-card {
+      background: var(--paper);
+      border: 1px solid #e8e8e3;
+      padding: 30px 34px 26px;
+    }
+    .player-top {
+      display: grid;
+      grid-template-columns: 156px minmax(0, 1fr) 130px;
+      gap: 28px;
+      align-items: center;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+    .portrait-wrap {
+      position: relative;
+      width: 156px;
+      height: 156px;
+      overflow: hidden;
+      border: 1px solid #c9c9c3;
+      border-radius: 5px;
+      background: #ecece8;
+    }
+    .portrait-wrap img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .portrait-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      color: #777873;
+      font-size: 12px;
+      text-align: center;
+    }
+    .player-heading { min-width: 0; }
+    .eyebrow {
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: clamp(30px, 4.3vw, 47px);
+      font-weight: 800;
+      letter-spacing: -.055em;
+      line-height: 1.08;
+      overflow-wrap: anywhere;
+    }
+    .position {
+      display: inline-flex;
+      align-items: center;
+      min-height: 27px;
+      margin: 11px 0 0;
+      padding: 3px 9px;
+      border: 1px solid #deded9;
+      border-radius: 3px;
+      color: #33342f;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .035em;
+    }
+    .overall-block {
+      align-self: center;
+      justify-self: end;
+      min-width: 96px;
+      text-align: left;
+    }
+    .overall-label {
+      display: block;
+      margin-bottom: 1px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .overall-value {
+      display: block;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -.025em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .description-section {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-title {
+      margin: 0 0 8px;
+      color: #33342f;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .description {
+      max-width: 940px;
+      margin: 0;
+      color: #666761;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+    .stats-section { padding-top: 20px; }
+    .stats-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+    .stats-heading .section-title { margin: 0; }
+    .scale-note {
+      color: #969791;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .035em;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 20px;
+      row-gap: 20px;
+    }
+    .stat {
+      min-width: 0;
+      padding: 1px 0 13px;
+      border-bottom: 1px solid #e5e5e0;
+      text-align: center;
+    }
+    .stat-value {
+      display: block;
+      margin-bottom: 1px;
+      color: var(--stat-color);
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 31px;
+      font-weight: 700;
+      line-height: 1.05;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-name {
+      display: block;
+      margin-bottom: 8px;
+      color: #777873;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+    .meter {
+      height: 4px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: #e4e4e0;
+    }
+    .meter-fill {
+      width: var(--stat-width);
+      height: 100%;
+      border-radius: inherit;
+      background: var(--stat-color);
+    }
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 22px 10px;
+      color: #85867f;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      body { padding: 20px 12px 36px; }
+      .roster-topline { align-items: flex-start; flex-direction: column; }
+      .roster-actions { width: 100%; justify-content: flex-start; }
+      .search-wrap { flex: 1 1 170px; }
+      .search-input { width: 100%; }
+      .player-tabs-wrap { align-items: stretch; }
+      .step-controls { align-self: center; }
+      .player-card { padding: 19px 18px 20px; }
+      .player-top {
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 17px;
+        padding-bottom: 22px;
+      }
+      .portrait-wrap { width: 112px; height: 112px; }
+      .overall-block {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: -5px;
+      }
+      .overall-value { font-size: 37px; }
+      .position { margin-top: 8px; }
+      .description-section { padding: 18px 0 20px; }
+      .stats-grid { column-gap: 14px; row-gap: 15px; }
+    }
+    @media (max-width: 420px) {
+      .roster-panel { padding: 14px 13px 10px; }
+      .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .player-tabs-wrap { gap: 6px; }
+      .player-tab { max-width: 185px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="roster-panel" aria-label="Player browser">
+      <div class="roster-topline">
+        <div class="roster-heading">
+          <h2 class="roster-title">Player roster</h2>
+          <p class="roster-subtitle" id="rosterSubtitle">Browse your player list</p>
+        </div>
+        <div class="roster-actions">
+          <label class="search-wrap">
+            <span class="sr-only" hidden>Search players</span>
+            <input class="search-input" id="playerSearch" type="search" placeholder="Search players..." autocomplete="off" aria-label="Search players" />
+          </label>
+          <button class="utility-button" id="loadJsonButton" type="button">Load JSON</button>
+          <input class="file-input" id="jsonFileInput" type="file" accept=".json,application/json" />
+        </div>
+      </div>
+
+      <div class="filter-tabs" id="filterTabs" role="tablist" aria-label="Filter players by type"></div>
+
+      <div class="player-tabs-wrap">
+        <div class="player-tabs" id="playerTabs" role="tablist" aria-label="Players"></div>
+        <div class="step-controls" aria-label="Previous and next player">
+          <button class="step-button" id="previousPlayer" type="button" aria-label="Previous player" title="Previous player">‹</button>
+          <button class="step-button" id="nextPlayer" type="button" aria-label="Next player" title="Next player">›</button>
+        </div>
+      </div>
+      <p class="roster-status" id="rosterStatus" role="status" aria-live="polite">Loading playerlist.json…</p>
+    </section>
+
+    <article class="player-card" aria-live="polite">
+      <header class="player-top">
+        <div class="portrait-wrap">
+          <div class="portrait-fallback" id="portraitFallback">Add your player image file</div>
+          <img id="playerImage" alt="Player image" hidden />
+        </div>
+        <div class="player-heading">
+          <p class="eyebrow">Player profile</p>
+          <h1 id="playerName">Player Name</h1>
+          <p class="position" id="playerPosition">Position</p>
+        </div>
+        <div class="overall-block">
+          <span class="overall-label">Overall</span>
+          <strong class="overall-value" id="overall">--</strong>
+        </div>
+      </header>
+
+      <section class="description-section" aria-labelledby="descriptionTitle">
+        <h2 class="section-title" id="descriptionTitle">Description</h2>
+        <p class="description" id="description">Your player description will appear here.</p>
+      </section>
+
+      <section class="stats-section" aria-labelledby="statsTitle">
+        <div class="stats-heading">
+          <h2 class="section-title" id="statsTitle">Player Stats</h2>
+          <span class="scale-note">Ratings out of 100</span>
+        </div>
+        <div class="stats-grid" id="statsGrid"></div>
+      </section>
+    </article>
+  </main>
+
+  <script>
+    const RATING_LEVELS = [
+      { min: 90, color: "#13a34a" }, // 90-100: green
+      { min: 80, color: "#75a92c" }, // 80-89: light green
+      { min: 70, color: "#c5a323" }, // 70-79: yellow
+      { min: 60, color: "#df792b" }, // 60-69: orange
+      { min: 0, color: "#d94343" }   // 0-59: red
+    ];
+
+    const COMMON_STATS = [
+      ["Agility", "agility"],
+      ["Speed", "speed"],
+      ["Coverage", "coverage"],
+      ["Jump", "jump"],
+      ["Awareness", "awareness"],
+      ["Pass Rush", "passRush"]
+    ];
+    const QB_STATS = [["Arm Strength", "armStrength"], ["Accuracy", "accuracy"]];
+    const WR_STATS = [["Route Running", "routeRunning"], ["Catching", "catching"]];
+
+    const state = {
+      players: [],
+      filteredPlayers: [],
+      activePlayerId: null,
+      activeFilter: "all",
+      search: ""
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function ratingColor(value) {
+      const rating = Math.max(0, Math.min(100, Number(value)));
+      return RATING_LEVELS.find(level => rating >= level.min).color;
+    }
+
+    function normalizePlayer(player, index) {
+      if (!player || typeof player !== "object") return null;
+      const playerType = ["qb", "wr"].includes(String(player.playerType || "").toLowerCase())
+        ? String(player.playerType).toLowerCase()
+        : "standard";
+      return {
+        ...player,
+        id: String(player.id || `player-${index + 1}`),
+        name: String(player.name || `Player ${index + 1}`),
+        position: String(player.position || "--"),
+        playerType,
+        stats: player.stats && typeof player.stats === "object" ? player.stats : {}
+      };
+    }
+
+    function setStatus(message, isError = false) {
+      const status = $("rosterStatus");
+      status.textContent = message;
+      status.classList.toggle("error", isError);
+    }
+
+    function selectedPlayer() {
+      return state.players.find(player => player.id === state.activePlayerId) || null;
+    }
+
+    function playerMatchesFilter(player) {
+      if (state.activeFilter === "all") return true;
+      if (state.activeFilter === "other") return player.playerType === "standard";
+      return player.playerType === state.activeFilter;
+    }
+
+    function applyRosterFilters() {
+      const query = state.search.trim().toLowerCase();
+      state.filteredPlayers = state.players.filter(player => {
+        const matchesType = playerMatchesFilter(player);
+        const matchesSearch = !query || `${player.name} ${player.position}`.toLowerCase().includes(query);
+        return matchesType && matchesSearch;
+      });
+
+      if (!state.filteredPlayers.some(player => player.id === state.activePlayerId)) {
+        state.activePlayerId = state.filteredPlayers[0]?.id || null;
+      }
+      renderFilterTabs();
+      renderPlayerTabs();
+      renderPlayer();
+      updateRosterSubtitle();
+    }
+
+    function updateRosterSubtitle() {
+      const total = state.players.length;
+      const shown = state.filteredPlayers.length;
+      $("rosterSubtitle").textContent = `${shown} of ${total} ${total === 1 ? "player" : "players"}`;
+    }
+
+    function renderFilterTabs() {
+      const container = $("filterTabs");
+      const filters = [
+        ["all", "All players", state.players.length],
+        ["qb", "QB", state.players.filter(p => p.playerType === "qb").length],
+        ["wr", "WR", state.players.filter(p => p.playerType === "wr").length],
+        ["other", "Other", state.players.filter(p => p.playerType === "standard").length]
+      ];
+      container.replaceChildren();
+      for (const [key, label, count] of filters) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "filter-tab";
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-selected", String(state.activeFilter === key));
+        button.innerHTML = `${label}<span class="filter-count">${count}</span>`;
+        button.addEventListener("click", () => {
+          state.activeFilter = key;
+          applyRosterFilters();
+        });
+        container.append(button);
+      }
+    }
+
+    function renderPlayerTabs() {
+      const container = $("playerTabs");
+      container.replaceChildren();
+      state.filteredPlayers.forEach(player => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "player-tab";
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-selected", String(player.id === state.activePlayerId));
+        button.setAttribute("aria-label", `${player.name}, ${player.position}`);
+
+        const name = document.createElement("span");
+        name.className = "player-tab-name";
+        name.textContent = player.name;
+        const position = document.createElement("span");
+        position.className = "player-tab-position";
+        position.textContent = player.position;
+        button.append(name, position);
+        button.addEventListener("click", () => selectPlayer(player.id));
+        container.append(button);
+      });
+
+      if (!state.filteredPlayers.length) {
+        const empty = document.createElement("span");
+        empty.className = "player-tab-position";
+        empty.textContent = "No players found";
+        container.append(empty);
+      }
+
+      const index = state.filteredPlayers.findIndex(player => player.id === state.activePlayerId);
+      $("previousPlayer").disabled = index <= 0;
+      $("nextPlayer").disabled = index < 0 || index >= state.filteredPlayers.length - 1;
+    }
+
+    function selectPlayer(id) {
+      state.activePlayerId = id;
+      renderPlayerTabs();
+      renderPlayer();
+      const activeTab = [...$("playerTabs").children].find(button => button.getAttribute("aria-selected") === "true");
+      activeTab?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+    }
+
+    function renderPlayer() {
+      const player = selectedPlayer();
+      if (!player) {
+        $("playerName").textContent = "No players found";
+        $("playerPosition").textContent = "--";
+        $("overall").textContent = "--";
+        $("overall").style.color = "#777873";
+        $("description").textContent = "Try another search or filter, or add players to playerlist.json.";
+        $("playerImage").hidden = true;
+        $("portraitFallback").hidden = false;
+        $("portraitFallback").textContent = "No player selected";
+        $("statsGrid").replaceChildren();
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No stats to display.";
+        $("statsGrid").append(empty);
+        document.title = "Player Profiles";
+        return;
+      }
+
+      document.title = `${player.name} - Player Profile`;
+      $("playerName").textContent = player.name;
+      $("playerPosition").textContent = player.position;
+      $("overall").textContent = player.overall ?? "--";
+      $("description").textContent = player.description || "No description added.";
+
+      const overall = Number(player.overall);
+      $("overall").style.color = Number.isFinite(overall) ? ratingColor(overall) : "#777873";
+
+      const image = $("playerImage");
+      const fallback = $("portraitFallback");
+      image.onload = () => { image.hidden = false; fallback.hidden = true; };
+      image.onerror = () => {
+        image.hidden = true;
+        fallback.hidden = false;
+        fallback.textContent = player.image ? `Image not found: ${player.image}` : "No player image added";
+      };
+      image.hidden = true;
+      fallback.hidden = false;
+      fallback.textContent = player.image ? "Loading image…" : "No player image added";
+      if (player.image) image.src = player.image;
+      else image.removeAttribute("src");
+
+      let selectedStats = [...COMMON_STATS];
+      if (player.playerType === "qb") selectedStats.push(...QB_STATS);
+      if (player.playerType === "wr") selectedStats.push(...WR_STATS);
+
+      const grid = $("statsGrid");
+      grid.replaceChildren();
+      let visibleCount = 0;
+      for (const [label, key] of selectedStats) {
+        const rawValue = player.stats?.[key];
+        if (rawValue === null || rawValue === undefined || rawValue === "") continue;
+        const value = Number(rawValue);
+        if (!Number.isFinite(value)) continue;
+
+        const safeValue = Math.max(0, Math.min(100, value));
+        const color = ratingColor(safeValue);
+        const item = document.createElement("div");
+        item.className = "stat";
+        item.style.setProperty("--stat-color", color);
+        item.style.setProperty("--stat-width", `${safeValue}%`);
+
+        const rating = document.createElement("strong");
+        rating.className = "stat-value";
+        rating.textContent = safeValue;
+        const name = document.createElement("span");
+        name.className = "stat-name";
+        name.textContent = label;
+        const meter = document.createElement("div");
+        meter.className = "meter";
+        const fill = document.createElement("div");
+        fill.className = "meter-fill";
+        meter.append(fill);
+        item.append(rating, name, meter);
+        grid.append(item);
+        visibleCount++;
+      }
+
+      if (!visibleCount) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No ratings added for this player yet.";
+        grid.append(empty);
+      }
+    }
+
+    function movePlayer(direction) {
+      const currentIndex = state.filteredPlayers.findIndex(player => player.id === state.activePlayerId);
+      const next = state.filteredPlayers[currentIndex + direction];
+      if (next) selectPlayer(next.id);
+    }
+
+    function validateAndSetPlayers(data, sourceLabel) {
+      if (!data || !Array.isArray(data.players)) {
+        throw new Error('The JSON needs a top-level "players" array.');
+      }
+      const players = data.players.map(normalizePlayer).filter(Boolean);
+      if (!players.length) throw new Error("No players were found in the players array.");
+
+      const ids = new Set();
+      for (const player of players) {
+        if (ids.has(player.id)) throw new Error(`Duplicate player id: ${player.id}. Give each player a unique id.`);
+        ids.add(player.id);
+      }
+
+      state.players = players;
+      state.activeFilter = "all";
+      state.search = "";
+      $("playerSearch").value = "";
+      applyRosterFilters();
+      setStatus(`Loaded ${players.length} ${players.length === 1 ? "player" : "players"} from ${sourceLabel}.`);
+    }
+
+    async function loadDefaultJson() {
+      try {
+        const response = await fetch("./playerlist.json", { cache: "no-store" });
+        if (!response.ok) throw new Error(`Could not load playerlist.json (HTTP ${response.status}).`);
+        const data = await response.json();
+        validateAndSetPlayers(data, "playerlist.json");
+      } catch (error) {
+        setStatus(`${error.message} Use Load JSON to choose the file, or open this folder through a local web server.`, true);
+      }
+    }
+
+    $("playerSearch").addEventListener("input", event => {
+      state.search = event.target.value;
+      applyRosterFilters();
+    });
+    $("previousPlayer").addEventListener("click", () => movePlayer(-1));
+    $("nextPlayer").addEventListener("click", () => movePlayer(1));
+    $("loadJsonButton").addEventListener("click", () => $("jsonFileInput").click());
+    $("jsonFileInput").addEventListener("change", async event => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try {
+        const data = JSON.parse(await file.text());
+        validateAndSetPlayers(data, file.name);
+      } catch (error) {
+        setStatus(`Couldn't read ${file.name}: ${error.message}`, true);
+      }
+      event.target.value = "";
+    });
+
+    document.addEventListener("keydown", event => {
+      const tag = document.activeElement?.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || event.altKey || event.ctrlKey || event.metaKey) return;
+      if (event.key === "ArrowLeft") movePlayer(-1);
+      if (event.key === "ArrowRight") movePlayer(1);
+    });
+
+    loadDefaultJson();
+  </script>
+</body>
+</html>
