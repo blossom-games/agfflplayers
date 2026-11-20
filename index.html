@@ -7,7 +7,7 @@
   <title>Player Profiles</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       color-scheme: light;
@@ -825,17 +825,279 @@
     }
   </style>
 
+
+  <style id="final-profile-layout">
+    :root {
+      --page: #f3f5f6;
+      --paper: #ffffff;
+      --ink: #172027;
+      --muted: #78848d;
+      --line: #e3e8eb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      padding: 18px 22px 28px;
+      background: #f3f5f6;
+      color: #172027;
+      font-family: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: -0.012em;
+    }
+
+    .page {
+      width: min(100%, 1220px);
+      margin: 0 auto;
+    }
+
+    .roster-panel, .team-panel {
+      margin-bottom: 12px;
+      border: 1px solid #e4e9ec;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(25, 42, 54, .035);
+    }
+
+    .player-card {
+      width: 100%;
+      max-width: none;
+      aspect-ratio: 1 / 1;
+      min-height: 0;
+      margin: 0;
+      padding: clamp(22px, 3vw, 38px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0;
+      overflow: hidden;
+      border: 1px solid #e2e8eb;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(25, 42, 54, .045);
+    }
+
+    .player-top {
+      flex: 0 0 auto;
+      grid-template-columns: minmax(150px, 25%) minmax(0, 1fr) auto;
+      gap: clamp(18px, 2.6vw, 34px);
+      align-items: center;
+      padding: 0 0 clamp(18px, 2.3vw, 28px);
+      border-bottom: 1px solid #e7ecef;
+    }
+
+    .portrait-wrap {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border: 0;
+      border-radius: 9px;
+      background: #edf1f3;
+    }
+
+    .portrait-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+
+    .eyebrow {
+      margin-bottom: 7px;
+      color: #87939c;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .13em;
+    }
+
+    h1 {
+      color: #172027;
+      font-family: "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(30px, 4.1vw, 54px);
+      font-weight: 800;
+      letter-spacing: -.065em;
+      line-height: 1.02;
+    }
+
+    .player-meta {
+      gap: 7px;
+      margin-top: 13px;
+    }
+
+    .player-meta .position, .player-meta .player-team {
+      min-height: 27px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 750;
+    }
+
+    .player-nickname {
+      margin: 12px 0 0;
+      color: #7c8992;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .overall-block {
+      min-width: 76px;
+      align-self: center;
+      justify-self: end;
+      text-align: right;
+    }
+
+    .overall-label {
+      margin-bottom: 5px;
+      color: #87939c;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .overall-value {
+      font-family: "Inter", "DM Sans", sans-serif;
+      font-size: clamp(38px, 5vw, 60px);
+      font-weight: 800;
+      letter-spacing: -.07em;
+      line-height: .95;
+    }
+
+    .description-section {
+      flex: 0 0 auto;
+      padding: clamp(14px, 1.8vw, 22px) 0;
+      border: 0;
+    }
+
+    .description-section .section-title { display: none; }
+
+    .description {
+      max-width: 100%;
+      margin: 0;
+      color: #687680;
+      font-size: clamp(12px, 1.05vw, 14px);
+      font-weight: 450;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .attributes-section {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 12px 0 0;
+      border-top: 1px solid #e7ecef;
+    }
+
+    .stats-heading {
+      flex: 0 0 auto;
+      margin-bottom: clamp(12px, 1.5vw, 18px);
+    }
+
+    .stats-heading .section-title {
+      color: #26343d;
+      font-size: 14px;
+      font-weight: 750;
+      letter-spacing: -.025em;
+      text-transform: none;
+    }
+
+    .scale-note {
+      color: #89959d;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .key-stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(8px, 1vw, 12px);
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .key-stat {
+      min-width: 0;
+      gap: 10px;
+      padding: clamp(10px, 1.2vw, 15px);
+      border: 1px solid #e8edef;
+      border-radius: 8px;
+      background: #fbfcfc;
+    }
+
+    .key-stat-label {
+      color: #697781;
+      font-size: clamp(10px, .9vw, 12px);
+      font-weight: 600;
+    }
+
+    .key-stat-value {
+      font-family: "Inter", "DM Sans", sans-serif;
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 800;
+      letter-spacing: -.055em;
+    }
+
+    .key-stat-meter {
+      height: 5px;
+      border-radius: 999px;
+      background: #e9eef0;
+    }
+
+    .key-stat-fill { border-radius: inherit; }
+
+    @media (min-width: 761px) {
+      body { padding-top: 16px; }
+    }
+
+    @media (max-width: 760px) {
+      body { padding: 12px; }
+      .player-card {
+        width: 100%;
+        aspect-ratio: auto;
+        min-height: 0;
+        padding: 18px;
+        overflow: visible;
+      }
+      .player-top {
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 14px;
+        padding-bottom: 17px;
+      }
+      .portrait-wrap { width: 112px; height: 112px; }
+      h1 { font-size: clamp(25px, 6vw, 36px); }
+      .overall-block {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: -5px;
+        text-align: left;
+      }
+      .overall-value { font-size: 36px; }
+      .description-section { padding: 15px 0; }
+      .attributes-section { flex: 0 0 auto; padding-top: 15px; }
+      .key-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .key-stat { padding: 11px; }
+      .key-stat-label { font-size: 10px; }
+      .key-stat-value { font-size: 24px; }
+    }
+
+    @media (max-width: 420px) {
+      .roster-topline { align-items: flex-start; flex-direction: column; }
+      .roster-actions, .search-wrap { width: 100%; }
+      .search-input { width: 100%; }
+      .player-card { padding: 15px; }
+      .player-top { grid-template-columns: 94px minmax(0, 1fr); gap: 12px; }
+      .portrait-wrap { width: 94px; height: 94px; }
+      .player-meta { gap: 5px; }
+      .player-meta .position, .player-meta .player-team { font-size: 9px; }
+      .stats-heading { align-items: baseline; }
+    }
+  </style>
+
 </head>
 <body>
-  <header class="site-header">
-    <a class="site-brand" href="#top" aria-label="Gridiron Index home">GRIDIRON <span>INDEX</span><small>LEAGUE DATABASE</small></a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="#roster">Players</a>
-      <a href="#teams">Teams</a>
-      <a href="#attributes">Attributes</a>
-    </nav>
-    <span class="edition-label">CUSTOM LEAGUE</span>
-  </header>
   <main class="page" id="top">
     <section class="roster-panel" id="roster" aria-label="Player browser">
       <div class="roster-topline">
@@ -893,17 +1155,16 @@
         </div>
       </header>
 
+      <section class="description-section" aria-labelledby="descriptionTitle">
+        <p class="description" id="description">Your player description will appear here.</p>
+      </section>
+
       <section class="attributes-section" id="attributes" aria-labelledby="attributesTitle">
         <div class="stats-heading">
           <h2 class="section-title" id="attributesTitle">Player attributes</h2>
           <span class="scale-note">Ratings out of 100</span>
         </div>
         <div class="key-stats" id="keyStats" aria-label="Player attribute ratings"></div>
-      </section>
-
-      <section class="description-section" aria-labelledby="descriptionTitle">
-        <h2 class="section-title" id="descriptionTitle">About this player</h2>
-        <p class="description" id="description">Your player description will appear here.</p>
       </section>
     </article>
   </main>
