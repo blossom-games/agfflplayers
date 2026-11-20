@@ -94,3 +94,226 @@
       "image": "images/wilton-kim.png",
       "playerType": "qb",
       "description": "Horrible commissioner, but a great quarterback and defender.",
+      "stats": {
+        "armStrength": 87,
+        "accuracy": 91,
+        "agility": 99,
+        "speed": 97,
+        "coverage": 97,
+        "jump": 92,
+        "awareness": 92,
+        "passRush": 92
+      }
+    },
+    {
+      "id": "aryan-nair",
+      "name": "Aryan Nair",
+      "shortName": "Aryan",
+      "nickname": "Poland",
+      "position": "WR",
+      "overall": 82,
+      "image": "images/aryan-nair.png",
+      "playerType": "wr",
+      "description": "Just a guy who wants to play some football. Nuff said.",
+      "stats": {
+        "routeRunning": 76,
+        "catching": 89,
+        "agility": 79,
+        "speed": 82,
+        "coverage": 86,
+        "jump": 80,
+        "awareness": 81,
+        "passRush": 93
+      }
+    },
+    {
+      "id": "daniel-hsiao",
+      "name": "Daniel Hsiao",
+      "shortName": "Daniel",
+      "nickname": "Pushoff Merchant",
+      "position": "WR",
+      "overall": 90,
+      "image": "images/daniel-hsiao.png",
+      "playerType": "wr",
+      "description": "Abuses his height for a living and bribes the refs. No change of direction, no agility. Horrible on defense.",
+      "stats": {
+        "routeRunning": 83,
+        "catching": 99,
+        "agility": 85,
+        "speed": 93,
+        "coverage": 80,
+        "jump": 97,
+        "awareness": 94,
+        "passRush": 89
+      }
+    },
+    {
+      "id": "johnny-zhang",
+      "name": "Johnny Zhang",
+      "shortName": "Johnny",
+      "nickname": "Apple sauce",
+      "position": "WR",
+      "overall": 88,
+      "image": "images/johnny-zhang.png",
+      "playerType": "wr",
+      "description": "Fast and explosive receiver, but has trouble catching the ball sometimes. Defensive MONSTER though.",
+      "stats": {
+        "routeRunning": 91,
+        "catching": 78,
+        "agility": 84,
+        "speed": 94,
+        "coverage": 96,
+        "jump": 94,
+        "awareness": 88,
+        "passRush": 80
+      }
+    },
+    {
+      "id": "luke-zhang",
+      "name": "Luke Zhang",
+      "shortName": "Luke",
+      "nickname": "Meat Shield",
+      "position": "WR",
+      "overall": 69,
+      "image": "images/luke-zhang.png",
+      "playerType": "wr",
+      "description": "His lack of speed and coordination makes him a player with no talent as a receiver and a liability on defense.",
+      "stats": {
+        "routeRunning": 65,
+        "catching": 75,
+        "agility": 68,
+        "speed": 72,
+        "coverage": 63,
+        "jump": 76,
+        "awareness": 68,
+        "passRush": 69
+      }
+    },
+    {
+      "id": "nelson-wu",
+      "name": "Nelson Wu",
+      "shortName": "Nelson",
+      "nickname": "Benson Boone",
+      "position": "WR",
+      "overall": 90,
+      "image": "images/nelson-wu.png",
+      "playerType": "wr",
+      "description": "This ultimate sleeper outperforms all of his competition. He excels in the pass rush and makes really explosive plays.",
+      "stats": {
+        "routeRunning": 93,
+        "catching": 80,
+        "agility": 94,
+        "speed": 93,
+        "coverage": 90,
+        "jump": 93,
+        "awareness": 82,
+        "passRush": 96
+      }
+    },
+    {
+      "id": "rayansh-shah",
+      "name": "Rayansh Shah",
+      "shortName": "Rayansh",
+      "nickname": "Comm",
+      "position": "WR",
+      "overall": 91,
+      "image": "images/rayansh-shah.png",
+      "playerType": "wr",
+      "description": "A really friendly guy. Fast and shifty, but teams take advantage of his friendliness, making him a liability on defense.",
+      "stats": {
+        "routeRunning": 91,
+        "catching": 90,
+        "agility": 93,
+        "speed": 92,
+        "coverage": 89,
+        "jump": 93,
+        "awareness": 91,
+        "passRush": 90
+      }
+    },
+    {
+      "id": "ronald-choudhary",
+      "name": "Ronald Choudhary",
+      "shortName": "Ronald",
+      "nickname": "Ronnie",
+      "position": "WR",
+      "overall": 92,
+      "image": "images/ronald-choudhary.png",
+      "playerType": "wr",
+      "description": "This man brings swagger to the football field through his crispy routes and insane pass rush.",
+      "stats": {
+        "routeRunning": 97,
+        "catching": 84,
+        "agility": 92,
+        "speed": 94,
+        "coverage": 95,
+        "jump": 89,
+        "awareness": 93,
+        "passRush": 99
+      }
+    },
+    {
+      "id": "sheung-choi",
+      "name": "Sheung Choi",
+      "shortName": "Sheung",
+      "nickname": "Masked Killa",
+      "position": "WR",
+      "overall": 93,
+      "image": "images/sheung-choi.png",
+      "playerType": "wr",
+      "description": "The Route Technician. He would smoke you in a 1v1... Pretty nice on defense.",
+      "stats": {
+        "routeRunning": 99,
+        "catching": 94,
+        "agility": 98,
+        "speed": 91,
+        "coverage": 89,
+        "jump": 94,
+        "awareness": 96,
+        "passRush": 89
+      }
+    },
+    {
+      "id": "terence",
+      "name": "Terence",
+      "shortName": "Terence",
+      "nickname": "Pequeña Muerte",
+      "position": "WR",
+      "overall": 86,
+      "image": "images/terence.png",
+      "playerType": "wr",
+      "description": "Everyone thought his purging days were over. Pequeña Muerte is back with his decent agility and playmaking ability.",
+      "stats": {
+        "routeRunning": 82,
+        "catching": 91,
+        "agility": 92,
+        "speed": 86,
+        "coverage": 86,
+        "jump": 88,
+        "awareness": 83,
+        "passRush": 86
+      }
+    },
+    {
+      "id": "victor",
+      "name": "Victor",
+      "shortName": "Victor",
+      "nickname": "Babyface",
+      "position": "WR",
+      "overall": 87,
+      "image": "images/victor.png",
+      "playerType": "wr",
+      "description": "Cuteness Overload! If Rob Gronkowski and Derrick Henry had a baby, this is what he would be like. Great hands, but on the slower side. Decent on defense.",
+      "stats": {
+        "routeRunning": 81,
+        "catching": 93,
+        "agility": 86,
+        "speed": 85,
+        "coverage": 87,
+        "jump": 92,
+        "awareness": 89,
+        "passRush": 90
+      }
+    }
+  ]
+}
