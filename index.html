@@ -440,8 +440,6 @@
             <span class="sr-only" hidden>Search players</span>
             <input class="search-input" id="playerSearch" type="search" placeholder="Search players..." autocomplete="off" aria-label="Search players" />
           </label>
-          <button class="utility-button" id="loadJsonButton" type="button">Load JSON</button>
-          <input class="file-input" id="jsonFileInput" type="file" accept=".json,application/json" />
         </div>
       </div>
 
@@ -775,19 +773,6 @@
     });
     $("previousPlayer").addEventListener("click", () => movePlayer(-1));
     $("nextPlayer").addEventListener("click", () => movePlayer(1));
-    $("loadJsonButton").addEventListener("click", () => $("jsonFileInput").click());
-    $("jsonFileInput").addEventListener("change", async event => {
-      const file = event.target.files?.[0];
-      if (!file) return;
-      try {
-        const data = JSON.parse(await file.text());
-        validateAndSetPlayers(data, file.name);
-      } catch (error) {
-        setStatus(`Couldn't read ${file.name}: ${error.message}`, true);
-      }
-      event.target.value = "";
-    });
-
     document.addEventListener("keydown", event => {
       const tag = document.activeElement?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || event.altKey || event.ctrlKey || event.metaKey) return;
