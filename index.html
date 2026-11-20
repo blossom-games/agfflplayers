@@ -2125,6 +2125,44 @@
     .key-stats { width: 100%; }
   </style>
 
+
+  <style id="description-width-and-taller-ratings">
+    /* Keep the description edge aligned with the portrait/name/overall width used by the ratings. */
+    .description-section {
+      width: var(--profile-inline-width, 100%);
+      max-width: 100%;
+      align-self: flex-start;
+    }
+    .description {
+      width: 100%;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+
+    /* Give each of the eight rating cells a little more vertical breathing room. */
+    .key-stats {
+      grid-auto-rows: minmax(62px, auto);
+    }
+    .key-stat {
+      min-height: 62px;
+      padding-top: 3px;
+      padding-bottom: 7px;
+      gap: 6px;
+    }
+    .key-stat-meter {
+      margin-top: 3px;
+    }
+
+    @media (max-width: 760px) {
+      .key-stats { grid-auto-rows: minmax(56px, auto); }
+      .key-stat { min-height: 56px; padding-top: 2px; padding-bottom: 6px; gap: 4px; }
+    }
+    @media (max-width: 430px) {
+      .key-stats { grid-auto-rows: minmax(51px, auto); }
+      .key-stat { min-height: 51px; padding-bottom: 5px; }
+    }
+  </style>
+
 </head>
 <body>
   <main class="page" id="top">
