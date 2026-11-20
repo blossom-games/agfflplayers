@@ -426,10 +426,145 @@
       .player-tab { max-width: 185px; }
     }
   </style>
+
+  <style id="fifa-index-default-theme">
+    :root {
+      --page:#f3f5f6; --paper:#fff; --ink:#171b20; --muted:#74808b;
+      --line:#e1e6e9; --green:#159447; --green-soft:#edf7f0;
+    }
+    body { padding:0 24px 64px; background:var(--page); color:var(--ink); }
+    .site-header {
+      height:64px; margin:0 -24px 26px; padding:0 max(24px,calc((100vw - 1220px)/2));
+      display:flex; align-items:center; gap:34px; background:#fff; border-bottom:1px solid var(--line);
+      position:sticky; top:0; z-index:30;
+    }
+    .site-brand { display:flex; align-items:baseline; gap:4px; color:#171b20; text-decoration:none; font-size:19px; line-height:1; font-weight:900; letter-spacing:-.06em; white-space:nowrap; }
+    .site-brand span { color:var(--green); }
+    .site-brand small { align-self:center; margin-left:8px; color:#89939c; font-size:8px; font-weight:850; letter-spacing:.13em; }
+    .site-nav { display:flex; align-items:center; gap:25px; height:100%; }
+    .site-nav a { display:flex; align-items:center; height:100%; color:#66717b; text-decoration:none; font-size:12px; font-weight:750; border-bottom:2px solid transparent; }
+    .site-nav a:hover { color:var(--green); border-bottom-color:var(--green); }
+    .edition-label { margin-left:auto; padding:7px 10px; border:1px solid #dce9df; border-radius:4px; background:#f1f8f3; color:#287246; font-size:9px; font-weight:850; letter-spacing:.1em; }
+    .page { width:min(1220px,100%); }
+    .roster-panel,.team-panel,.player-card { background:#fff; border:1px solid var(--line); border-radius:6px; box-shadow:0 2px 9px rgba(24,38,48,.035); }
+    .roster-panel { padding:17px 20px 13px; margin-bottom:12px; }
+    .roster-title { font-size:15px; letter-spacing:-.025em; }
+    .roster-subtitle { color:#89939d; font-size:11px; }
+    .search-input { border-color:#dfe5e8; border-radius:4px; background:#fff; }
+    .utility-button,.step-button,.filter-tab,.player-tab,.team-tab { border-radius:4px; }
+    .utility-button,.step-button { border-color:#dfe5e8; color:#46515b; }
+    .utility-button:hover,.step-button:hover:not(:disabled) { border-color:#acd3b8; background:#f3f9f5; }
+    .filter-tabs { border-bottom-color:#e6eaed; }
+    .filter-tab[aria-selected="true"],.player-tab[aria-selected="true"],.team-tab[aria-selected="true"] { border-color:#b9ddc4; background:var(--green-soft); color:#176b36; }
+    .player-tab { border-color:#e2e7ea; }
+    .player-tab:hover { border-color:#b9d9c3; background:#f7fbf8; }
+    .player-tab-team { color:#89949d; font-size:9px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+    .team-panel { margin-bottom:14px; padding:14px 18px 15px; }
+    .team-panel-heading { display:flex; align-items:baseline; gap:12px; margin-bottom:11px; }
+    .team-panel-heading h2 { margin:0; color:#303942; font-size:12px; font-weight:850; letter-spacing:.075em; text-transform:uppercase; }
+    .team-panel-heading span { color:#8a949e; font-size:11px; }
+    .team-tabs { display:flex; gap:7px; flex-wrap:wrap; }
+    .team-tab { min-height:30px; padding:0 12px; border:1px solid #dfe5e9; background:#fff; color:#5b6670; font-size:11px; font-weight:750; cursor:pointer; }
+    .team-tab:hover { border-color:#acd4b9; color:#176b36; }
+    .team-tab-count { margin-left:7px; color:#96a0a8; font-size:10px; }
+    .player-card { padding:28px 32px 30px; }
+    .player-top { grid-template-columns:260px minmax(0,1fr) 120px; gap:32px; align-items:center; padding-bottom:24px; }
+    .portrait-wrap { width:260px; height:300px; border:1px solid #dce2e6; border-radius:5px; background:#eef1f3; }
+    .portrait-wrap img { object-fit:cover; object-position:center top; }
+    .eyebrow { color:#7b8791; font-size:10px; font-weight:800; letter-spacing:.13em; }
+    h1 { color:#171b20; font-size:clamp(36px,4.7vw,54px); letter-spacing:-.06em; }
+    .position { border-color:#dfe5e8; border-radius:4px; background:#f7f8f9; color:#3d4852; font-size:12px; }
+    .player-team { display:inline-flex; align-items:center; min-height:27px; margin:9px 0 0 6px; padding:3px 10px; border:1px solid #d8eadf; border-radius:4px; background:#f0f8f2; color:#267245; font-size:11px; font-weight:800; vertical-align:middle; }
+    .player-nickname { margin:10px 0 0; color:#7b8790; font-size:13px; font-weight:600; }
+    .player-nickname strong { color:#4b5660; font-weight:800; }
+    .overall-block { min-width:100px; }
+    .overall-label { color:#7c8791; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .overall-value { font-size:62px; }
+    .key-stats { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:0; margin:0 0 4px; padding:20px 0 21px; border-bottom:1px solid var(--line); }
+    .key-stat { min-width:0; padding:0 14px; border-right:1px solid #e9edef; text-align:center; }
+    .key-stat:first-child { padding-left:0; }
+    .key-stat:last-child { padding-right:0; border-right:0; }
+    .key-stat-value { display:block; color:var(--rating-color); font-family:"Barlow Condensed",Impact,sans-serif; font-size:34px; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; }
+    .key-stat-label { display:block; margin-top:5px; color:#68747e; font-size:10px; font-weight:800; letter-spacing:.055em; text-transform:uppercase; overflow-wrap:anywhere; }
+    .description-section { padding:21px 0 23px; border-bottom:1px solid var(--line); }
+    .section-title { color:#303a43; font-size:12px; font-weight:850; letter-spacing:.09em; }
+    .description { color:#65717b; font-size:13px; line-height:1.7; }
+    .stats-section { padding-top:21px; }
+    .stats-heading { margin-bottom:16px; }
+    .scale-note { color:#89949d; font-size:10px; font-weight:750; letter-spacing:.07em; text-transform:uppercase; }
+    .stats-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; }
+    .attribute-group { min-width:0; padding:15px 16px 7px; border:1px solid #e5eaed; border-radius:5px; background:#fff; }
+    .attribute-group-title { display:flex; align-items:center; justify-content:space-between; margin:0 0 11px; padding-bottom:9px; border-bottom:1px solid #edf0f2; color:#3d4851; font-size:11px; font-weight:850; letter-spacing:.09em; text-transform:uppercase; }
+    .attribute-group-title span { color:#9aa3aa; font-size:9px; font-weight:700; letter-spacing:.04em; }
+    .attribute-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:16px; }
+    .stat { min-width:0; display:grid; grid-template-columns:1fr auto; align-items:baseline; gap:2px 8px; padding:8px 0 10px; border-bottom:1px solid #edf0f2; text-align:left; }
+    .stat-value { grid-column:2; grid-row:1; margin:0; color:var(--stat-color); font-family:"Barlow Condensed",Impact,sans-serif; font-size:24px; font-weight:700; line-height:1; }
+    .stat-name { grid-column:1; grid-row:1; margin:0; color:#6c7780; font-size:11px; font-weight:600; line-height:1.3; }
+    .meter { grid-column:1 / -1; height:4px; margin-top:4px; border-radius:1px; background:#edf0f2; }
+    .meter-fill { border-radius:1px; }
+    .empty-state { grid-column:1/-1; }
+    @media(max-width:900px) {
+      .player-top { grid-template-columns:210px minmax(0,1fr) 90px; gap:22px; }
+      .portrait-wrap { width:210px; height:250px; }
+      .key-stats { grid-template-columns:repeat(3,minmax(0,1fr)); row-gap:16px; }
+      .key-stat:nth-child(3) { border-right:0; }
+      .key-stat:nth-child(4) { padding-left:0; }
+      .stats-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media(max-width:760px) {
+      body { padding:0 12px 38px; }
+      .site-header { margin:0 -12px 18px; padding:0 14px; height:57px; gap:12px; }
+      .site-brand { font-size:15px; }
+      .site-brand small,.edition-label { display:none; }
+      .site-nav { margin-left:auto; gap:14px; }
+      .site-nav a { font-size:11px; }
+      .roster-topline { align-items:flex-start; flex-direction:column; }
+      .roster-actions { width:100%; justify-content:flex-start; }
+      .search-wrap { flex:1 1 170px; }
+      .search-input { width:100%; }
+      .player-tabs-wrap { align-items:stretch; }
+      .step-controls { align-self:center; }
+      .player-card { padding:18px 16px 22px; }
+      .player-top { grid-template-columns:150px minmax(0,1fr); gap:17px; padding-bottom:20px; }
+      .portrait-wrap { width:150px; height:185px; }
+      .overall-block { grid-column:2; justify-self:start; margin-top:-6px; }
+      .overall-value { font-size:43px; }
+      .player-team { margin-left:0; }
+      .key-stats { grid-template-columns:repeat(3,minmax(0,1fr)); padding:16px 0; }
+      .description-section { padding:18px 0 19px; }
+    }
+    @media(max-width:500px) {
+      .site-nav { gap:9px; }
+      .site-nav a { font-size:10px; }
+      .roster-panel { padding:14px 13px 10px; }
+      .team-panel { padding:13px; }
+      .team-panel-heading { align-items:flex-start; flex-direction:column; gap:3px; }
+      .player-top { grid-template-columns:116px minmax(0,1fr); gap:13px; }
+      .portrait-wrap { width:116px; height:150px; }
+      h1 { font-size:29px; }
+      .position { margin-top:8px; }
+      .overall-value { font-size:39px; }
+      .key-stat { padding:0 7px; }
+      .key-stat-value { font-size:29px; }
+      .key-stat-label { font-size:9px; }
+      .stats-grid { grid-template-columns:1fr; gap:10px; }
+      .attribute-group { padding:13px 14px 6px; }
+      .attribute-grid { column-gap:14px; }
+    }
+  </style>
 </head>
 <body>
-  <main class="page">
-    <section class="roster-panel" aria-label="Player browser">
+  <header class="site-header">
+    <a class="site-brand" href="#top" aria-label="Gridiron Index home">GRIDIRON <span>INDEX</span><small>LEAGUE DATABASE</small></a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#roster">Players</a>
+      <a href="#teams">Teams</a>
+      <a href="#stats">Attributes</a>
+    </nav>
+    <span class="edition-label">CUSTOM LEAGUE</span>
+  </header>
+  <main class="page" id="top">
+    <section class="roster-panel" id="roster" aria-label="Player browser">
       <div class="roster-topline">
         <div class="roster-heading">
           <h2 class="roster-title">Player roster</h2>
@@ -455,6 +590,15 @@
       <p class="roster-status" id="rosterStatus" role="status" aria-live="polite">Loading playerlist.json…</p>
     </section>
 
+
+    <section class="team-panel" id="teams" aria-label="Filter players by team">
+      <div class="team-panel-heading">
+        <h2>Teams</h2>
+        <span>Choose a team to filter the player list</span>
+      </div>
+      <div class="team-tabs" id="teamTabs" role="tablist" aria-label="Filter players by team"></div>
+    </section>
+
     <article class="player-card" aria-live="polite">
       <header class="player-top">
         <div class="portrait-wrap">
@@ -465,6 +609,8 @@
           <p class="eyebrow">Player profile</p>
           <h1 id="playerName">Player Name</h1>
           <p class="position" id="playerPosition">Position</p>
+          <span class="player-team" id="playerTeam">Team</span>
+          <p class="player-nickname" id="playerNickname">Nickname: <strong>—</strong></p>
         </div>
         <div class="overall-block">
           <span class="overall-label">Overall</span>
@@ -472,12 +618,14 @@
         </div>
       </header>
 
+      <section class="key-stats" id="keyStats" aria-label="Key attributes"></section>
+
       <section class="description-section" aria-labelledby="descriptionTitle">
         <h2 class="section-title" id="descriptionTitle">Description</h2>
         <p class="description" id="description">Your player description will appear here.</p>
       </section>
 
-      <section class="stats-section" aria-labelledby="statsTitle">
+      <section class="stats-section" id="stats" aria-labelledby="statsTitle">
         <div class="stats-heading">
           <h2 class="section-title" id="statsTitle">Player Stats</h2>
           <span class="scale-note">Ratings out of 100</span>
@@ -512,6 +660,7 @@
       filteredPlayers: [],
       activePlayerId: null,
       activeFilter: "all",
+      activeTeam: "all",
       search: ""
     };
 
@@ -532,6 +681,7 @@
         id: String(player.id || `player-${index + 1}`),
         name: String(player.name || `Player ${index + 1}`),
         position: String(player.position || "--"),
+        team: String(player.team || "Unassigned"),
         playerType,
         stats: player.stats && typeof player.stats === "object" ? player.stats : {}
       };
@@ -548,16 +698,17 @@
     }
 
     function playerMatchesFilter(player) {
-      if (state.activeFilter === "all") return true;
-      if (state.activeFilter === "other") return player.playerType === "standard";
-      return player.playerType === state.activeFilter;
+      const matchesType = state.activeFilter === "all"
+        || (state.activeFilter === "other" ? player.playerType === "standard" : player.playerType === state.activeFilter);
+      const matchesTeam = state.activeTeam === "all" || player.team === state.activeTeam;
+      return matchesType && matchesTeam;
     }
 
     function applyRosterFilters() {
       const query = state.search.trim().toLowerCase();
       state.filteredPlayers = state.players.filter(player => {
         const matchesType = playerMatchesFilter(player);
-        const matchesSearch = !query || `${player.name} ${player.position}`.toLowerCase().includes(query);
+        const matchesSearch = !query || `${player.name} ${player.position} ${player.team} ${player.nickname || ""}`.toLowerCase().includes(query);
         return matchesType && matchesSearch;
       });
 
@@ -565,6 +716,7 @@
         state.activePlayerId = state.filteredPlayers[0]?.id || null;
       }
       renderFilterTabs();
+      renderTeamTabs();
       renderPlayerTabs();
       renderPlayer();
       updateRosterSubtitle();
@@ -573,7 +725,8 @@
     function updateRosterSubtitle() {
       const total = state.players.length;
       const shown = state.filteredPlayers.length;
-      $("rosterSubtitle").textContent = `${shown} of ${total} ${total === 1 ? "player" : "players"}`;
+      const scope = state.activeTeam === "all" ? "all teams" : state.activeTeam;
+      $("rosterSubtitle").textContent = `${shown} of ${total} ${total === 1 ? "player" : "players"} · ${scope}`;
     }
 
     function renderFilterTabs() {
@@ -600,6 +753,37 @@
       }
     }
 
+    function renderTeamTabs() {
+      const container = $("teamTabs");
+      const preferredOrder = ["Vipers", "Dolphins", "Scorpions", "Tigers", "Ghosts"];
+      const teams = [...new Set(state.players.map(player => player.team).filter(Boolean))]
+        .sort((a, b) => {
+          const ai = preferredOrder.indexOf(a), bi = preferredOrder.indexOf(b);
+          if (ai !== -1 || bi !== -1) return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+          return a.localeCompare(b);
+        });
+      container.replaceChildren();
+      const options = [["all", "All teams", state.players.length], ...teams.map(team => [team, team, state.players.filter(player => player.team === team).length])];
+      for (const [key, label, count] of options) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "team-tab";
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-selected", String(state.activeTeam === key));
+        const name = document.createElement("span");
+        name.textContent = label;
+        const number = document.createElement("span");
+        number.className = "team-tab-count";
+        number.textContent = count;
+        button.append(name, number);
+        button.addEventListener("click", () => {
+          state.activeTeam = key;
+          applyRosterFilters();
+        });
+        container.append(button);
+      }
+    }
+
     function renderPlayerTabs() {
       const container = $("playerTabs");
       container.replaceChildren();
@@ -617,7 +801,10 @@
         const position = document.createElement("span");
         position.className = "player-tab-position";
         position.textContent = player.position;
-        button.append(name, position);
+        const team = document.createElement("span");
+        team.className = "player-tab-team";
+        team.textContent = player.team;
+        button.append(name, position, team);
         button.addEventListener("click", () => selectPlayer(player.id));
         container.append(button);
       });
@@ -647,6 +834,9 @@
       if (!player) {
         $("playerName").textContent = "No players found";
         $("playerPosition").textContent = "--";
+        $("playerTeam").textContent = "No team";
+        $("playerNickname").innerHTML = 'Nickname: <strong>—</strong>';
+        $("keyStats").replaceChildren();
         $("overall").textContent = "--";
         $("overall").style.color = "#777873";
         $("description").textContent = "Try another search or filter, or add players to playerlist.json.";
@@ -665,6 +855,12 @@
       document.title = `${player.name} - Player Profile`;
       $("playerName").textContent = player.name;
       $("playerPosition").textContent = player.position;
+      $("playerTeam").textContent = player.team || "Unassigned";
+      $("playerNickname").innerHTML = "";
+      const nicknameLabel = document.createTextNode("Nickname: ");
+      const nicknameValue = document.createElement("strong");
+      nicknameValue.textContent = player.nickname || "—";
+      $("playerNickname").append(nicknameLabel, nicknameValue);
       $("overall").textContent = player.overall ?? "--";
       $("description").textContent = player.description || "No description added.";
 
@@ -689,36 +885,83 @@
       if (player.playerType === "qb") selectedStats.push(...QB_STATS);
       if (player.playerType === "wr") selectedStats.push(...WR_STATS);
 
-      const grid = $("statsGrid");
-      grid.replaceChildren();
-      let visibleCount = 0;
-      for (const [label, key] of selectedStats) {
+      const statGroups = [
+        { title: "Offense", stats: player.playerType === "qb" ? QB_STATS : player.playerType === "wr" ? WR_STATS : [] },
+        { title: "Athleticism", stats: [["Agility", "agility"], ["Speed", "speed"], ["Jump", "jump"]] },
+        { title: "Defense & Awareness", stats: [["Coverage", "coverage"], ["Awareness", "awareness"], ["Pass Rush", "passRush"]] }
+      ];
+      const keyCandidates = [
+        ...(player.playerType === "qb" ? QB_STATS : player.playerType === "wr" ? WR_STATS : []),
+        ["Agility", "agility"], ["Speed", "speed"], ["Coverage", "coverage"], ["Pass Rush", "passRush"]
+      ];
+      const keyStats = $("keyStats");
+      keyStats.replaceChildren();
+      let keyCount = 0;
+      for (const [label, key] of keyCandidates) {
         const rawValue = player.stats?.[key];
         if (rawValue === null || rawValue === undefined || rawValue === "") continue;
         const value = Number(rawValue);
         if (!Number.isFinite(value)) continue;
-
         const safeValue = Math.max(0, Math.min(100, value));
-        const color = ratingColor(safeValue);
-        const item = document.createElement("div");
-        item.className = "stat";
-        item.style.setProperty("--stat-color", color);
-        item.style.setProperty("--stat-width", `${safeValue}%`);
-
-        const rating = document.createElement("strong");
-        rating.className = "stat-value";
-        rating.textContent = safeValue;
+        const card = document.createElement("div");
+        card.className = "key-stat";
+        card.style.setProperty("--rating-color", ratingColor(safeValue));
+        const number = document.createElement("strong");
+        number.className = "key-stat-value";
+        number.textContent = safeValue;
         const name = document.createElement("span");
-        name.className = "stat-name";
+        name.className = "key-stat-label";
         name.textContent = label;
-        const meter = document.createElement("div");
-        meter.className = "meter";
-        const fill = document.createElement("div");
-        fill.className = "meter-fill";
-        meter.append(fill);
-        item.append(rating, name, meter);
-        grid.append(item);
-        visibleCount++;
+        card.append(number, name);
+        keyStats.append(card);
+        keyCount++;
+        if (keyCount === 6) break;
+      }
+
+      const grid = $("statsGrid");
+      grid.replaceChildren();
+      let visibleCount = 0;
+      for (const group of statGroups) {
+        const validStats = group.stats.filter(([label, key]) => {
+          const raw = player.stats?.[key];
+          return raw !== null && raw !== undefined && raw !== "" && Number.isFinite(Number(raw));
+        });
+        if (!validStats.length) continue;
+        const section = document.createElement("section");
+        section.className = "attribute-group";
+        const heading = document.createElement("h3");
+        heading.className = "attribute-group-title";
+        heading.textContent = group.title;
+        const count = document.createElement("span");
+        count.textContent = `${validStats.length} ATTRIBUTES`;
+        heading.append(count);
+        const attributeGrid = document.createElement("div");
+        attributeGrid.className = "attribute-grid";
+        for (const [label, key] of validStats) {
+          const value = Number(player.stats[key]);
+          const safeValue = Math.max(0, Math.min(100, value));
+          const color = ratingColor(safeValue);
+          const item = document.createElement("div");
+          item.className = "stat";
+          item.style.setProperty("--stat-color", color);
+          item.style.setProperty("--stat-width", `${safeValue}%`);
+          const rating = document.createElement("strong");
+          rating.className = "stat-value";
+          rating.textContent = safeValue;
+          const name = document.createElement("span");
+          name.className = "stat-name";
+          name.textContent = label;
+          const meter = document.createElement("div");
+          meter.className = "meter";
+          const fill = document.createElement("div");
+          fill.className = "meter-fill";
+          meter.append(fill);
+          item.append(rating, name, meter);
+          attributeGrid.append(item);
+          visibleCount++;
+        }
+        section.append(heading, attributeGrid);
+        grid.append(section);
       }
 
       if (!visibleCount) {
@@ -750,6 +993,7 @@
 
       state.players = players;
       state.activeFilter = "all";
+      state.activeTeam = "all";
       state.search = "";
       $("playerSearch").value = "";
       applyRosterFilters();
@@ -782,5 +1026,7 @@
 
     loadDefaultJson();
   </script>
+
+
 </body>
 </html>
