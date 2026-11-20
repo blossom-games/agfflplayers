@@ -1,59 +1,96 @@
 {
   "players": [
     {
-      "id": "player-001",
-      "name": "Jordan Example",
-      "position": "CB",
-      "overall": 92,
-      "image": "images/jordan-example.png",
-      "playerType": "standard",
-      "description": "A quick, physical corner who can stay with receivers in coverage and make plays on the ball. Replace this text with your own player description.",
-      "stats": {
-        "agility": 94,
-        "speed": 96,
-        "coverage": 93,
-        "jump": 88,
-        "awareness": 91,
-        "passRush": 67
-      }
-    },
-    {
-      "id": "player-002",
-      "name": "Alex Quarterback",
+      "id": "aadit-shinde",
+      "name": "Aadit Shinde",
+      "shortName": "Aadit",
+      "nickname": "51",
       "position": "QB",
-      "overall": 95,
-      "image": "images/alex-quarterback.png",
+      "overall": 85,
+      "image": "images/aadit-shinde.png",
       "playerType": "qb",
-      "description": "Write a short description of this quarterback here. You can include play style, strengths, or anything else you want.",
+      "description": "The name 51 strikes fear into everyone. Rightfully so, as this man throws 120 mph piss missiles down the field.",
       "stats": {
-        "agility": 86,
-        "speed": 82,
-        "coverage": 45,
-        "jump": 72,
-        "awareness": 97,
-        "passRush": 38,
-        "armStrength": 98,
-        "accuracy": 95
+        "armStrength": 99,
+        "accuracy": 80,
+        "agility": 81,
+        "speed": 87,
+        "coverage": 89,
+        "jump": 84,
+        "awareness": 80,
+        "passRush": 87
       }
     },
     {
-      "id": "player-003",
-      "name": "Taylor Receiver",
-      "position": "WR",
-      "overall": 91,
-      "image": "images/taylor-receiver.png",
-      "playerType": "wr",
-      "description": "Write your wide receiver description here.",
+      "id": "albert-jiang",
+      "name": "Albert Jiang",
+      "shortName": "Albert",
+      "nickname": "Meatball Marinara",
+      "position": "QB",
+      "overall": 79,
+      "image": "images/albert-jiang.png",
+      "playerType": "qb",
+      "description": "Where can you find this man outside of school? Subway. You'd have to watch his games to understand how bad this man truly is.",
       "stats": {
-        "agility": 93,
-        "speed": 97,
-        "coverage": 42,
-        "jump": 90,
-        "awareness": 85,
-        "passRush": 35,
-        "routeRunning": 94,
-        "catching": 92
+        "armStrength": 95,
+        "accuracy": 69,
+        "agility": 82,
+        "speed": 89,
+        "coverage": 72,
+        "jump": 79,
+        "awareness": 61,
+        "passRush": 89
       }
-    }
-  ]
-}
+    },
+    {
+      "id": "ethan-tang",
+      "name": "Ethan Tang",
+      "shortName": "Ethan",
+      "nickname": "The Snow Leopard",
+      "position": "QB",
+      "overall": 93,
+      "image": "images/ethan-tang.png",
+      "playerType": "qb",
+      "description": "Snow Leopards are known for their stealth, and this particular one will pounce on you unexpectedly on defense and on offense with speed and intelligence.",
+      "stats": {
+        "armStrength": 85,
+        "accuracy": 93,
+        "agility": 91,
+        "speed": 99,
+        "coverage": 98,
+        "jump": 93,
+        "awareness": 94,
+        "passRush": 92
+      }
+    },
+    {
+      "id": "kamel-abouelenin",
+      "name": "Kamel Abouelenin",
+      "shortName": "Kamel",
+      "nickname": "Abdullah",
+      "position": "QB",
+      "overall": 85,
+      "image": "images/kamel-abouelenin.png",
+      "playerType": "qb",
+      "description": "On paper, worst QB in the league but in Allah he trusts in, making him a confident pocket passer and this man's big framed body on defense provides unique value to his team.",
+      "stats": {
+        "armStrength": 93,
+        "accuracy": 87,
+        "agility": 83,
+        "speed": 86,
+        "coverage": 80,
+        "jump": 79,
+        "awareness": 86,
+        "passRush": 88
+      }
+    },
+    {
+      "id": "wilton-kim",
+      "name": "Wilton Kim",
+      "shortName": "Wilton",
+      "nickname": "Mr. Commissioner",
+      "position": "QB",
+      "overall": 93,
+      "image": "images/wilton-kim.png",
+      "playerType": "qb",
+      "description": "Horrible commissioner, but a great quarterback and defender.",
