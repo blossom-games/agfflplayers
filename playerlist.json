@@ -288,13 +288,13 @@
     },
     {
       "id": "terence",
-      "name": "Terence",
-      "shortName": "Terence",
+      "name": "Terrence He",
+      "shortName": "Terrence",
       "nickname": "Pequeña Muerte",
       "position": "WR",
       "overall": 86,
       "team": "Ghosts",
-      "image": "images/terence.png",
+      "image": "images/terrence.png",
       "playerType": "wr",
       "description": "Everyone thought his purging days were over. Pequeña Muerte is back with his decent agility and playmaking ability.",
       "stats": {
@@ -310,7 +310,7 @@
     },
     {
       "id": "victor",
-      "name": "Victor",
+      "name": "Victor Woo",
       "shortName": "Victor",
       "nickname": "Babyface",
       "position": "WR",
