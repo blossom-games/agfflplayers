@@ -725,9 +725,133 @@
     }
   </style>
 
+
+
+  <style id="square-player-profile">
+    /* Keep the actual player profile in a square canvas for clean browser screenshots. */
+    .player-card {
+      width: min(100%, 920px);
+      aspect-ratio: 1 / 1;
+      min-height: 0;
+      margin: 0 auto;
+      padding: 26px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .player-top {
+      grid-template-columns: 230px minmax(0, 1fr) 88px;
+      gap: 24px;
+      align-items: center;
+      flex: 0 0 auto;
+      padding-bottom: 18px;
+    }
+    .portrait-wrap {
+      width: 230px;
+      height: 230px;
+      aspect-ratio: 1 / 1;
+    }
+    .portrait-wrap img { object-fit: cover; object-position: center 18%; }
+
+    .attributes-section {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 15px 0;
+    }
+    .key-stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+    }
+    .key-stat { padding: 10px 12px 9px; }
+    .key-stat-top { align-items: center; }
+    .key-stat-label { font-size: 11px; }
+    .key-stat-value { font-size: 27px; }
+    .key-stat-meter { height: 5px; }
+
+    .description-section {
+      flex: 0 0 auto;
+      padding: 13px 0 0;
+    }
+    .description { font-size: 12px; line-height: 1.55; }
+
+    /* Keep the square composition balanced on medium browser widths. */
+    @media (min-width: 601px) and (max-width: 900px) {
+      .player-card { padding: 20px 22px; }
+      .player-top {
+        grid-template-columns: 155px minmax(0, 1fr) 72px;
+        gap: 15px;
+      }
+      .portrait-wrap { width: 155px; height: 155px; }
+      h1 { font-size: clamp(27px, 4vw, 40px); }
+      .overall-value { font-size: 48px; }
+      .key-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; }
+      .key-stat { padding: 9px 8px 8px; }
+      .key-stat-label { font-size: 10px; }
+      .key-stat-value { font-size: 24px; }
+    }
+
+    /* On narrow phones, let the profile grow naturally so no ratings or text are clipped. */
+    @media (max-width: 600px) {
+      .player-card {
+        width: 100%;
+        aspect-ratio: auto;
+        min-height: 0;
+        padding: 18px 16px 20px;
+        overflow: visible;
+      }
+      .player-top {
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 13px;
+      }
+      .portrait-wrap { width: 112px; height: 135px; }
+      .overall-block {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: -5px;
+      }
+      .overall-value { font-size: 38px; }
+      .key-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .key-stat { padding: 10px; }
+      .key-stat-label { font-size: 10px; }
+      .key-stat-value { font-size: 25px; }
+      .attributes-section { flex: 0 0 auto; padding: 18px 0; }
+      .description-section { padding-top: 12px; }
+      .description { font-size: 12px; line-height: 1.6; }
+    }
+  </style>
+
 </head>
 <body>
+  <header class="site-header">
+    <a class="site-brand" href="#top" aria-label="Gridiron Index home">GRIDIRON <span>INDEX</span><small>LEAGUE DATABASE</small></a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#roster">Players</a>
+      <a href="#teams">Teams</a>
+      <a href="#attributes">Attributes</a>
+    </nav>
+    <span class="edition-label">CUSTOM LEAGUE</span>
+  </header>
   <main class="page" id="top">
+    <section class="roster-panel" id="roster" aria-label="Player browser">
+      <div class="roster-topline">
+        <div class="roster-heading">
+          <h2 class="roster-title">Player roster</h2>
+          <p class="roster-subtitle" id="rosterSubtitle">Browse your player list</p>
+        </div>
+        <div class="roster-actions">
+          <label class="search-wrap">
+            <span class="sr-only" hidden>Search players</span>
+            <input class="search-input" id="playerSearch" type="search" placeholder="Search players..." autocomplete="off" aria-label="Search players" />
+          </label>
+        </div>
+      </div>
+
+      <div class="filter-tabs" id="filterTabs" role="tablist" aria-label="Filter players by type"></div>
 
       <div class="player-tabs-wrap">
         <div class="player-tabs" id="playerTabs" role="tablist" aria-label="Players"></div>
