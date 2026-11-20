@@ -7,7 +7,7 @@
       "nickname": "51",
       "position": "QB",
       "overall": 85,
-      "image": "images/aadit-shinde.png",
+      "image": "images/aadit.png",
       "playerType": "qb",
       "description": "The name 51 strikes fear into everyone. Rightfully so, as this man throws 120 mph piss missiles down the field.",
       "stats": {
@@ -28,7 +28,7 @@
       "nickname": "Meatball Marinara",
       "position": "QB",
       "overall": 79,
-      "image": "images/albert-jiang.png",
+      "image": "images/albert.png",
       "playerType": "qb",
       "description": "Where can you find this man outside of school? Subway. You'd have to watch his games to understand how bad this man truly is.",
       "stats": {
@@ -49,7 +49,7 @@
       "nickname": "The Snow Leopard",
       "position": "QB",
       "overall": 93,
-      "image": "images/ethan-tang.png",
+      "image": "images/ethan.png",
       "playerType": "qb",
       "description": "Snow Leopards are known for their stealth, and this particular one will pounce on you unexpectedly on defense and on offense with speed and intelligence.",
       "stats": {
@@ -70,7 +70,7 @@
       "nickname": "Abdullah",
       "position": "QB",
       "overall": 85,
-      "image": "images/kamel-abouelenin.png",
+      "image": "images/kamel.png",
       "playerType": "qb",
       "description": "On paper, worst QB in the league but in Allah he trusts in, making him a confident pocket passer and this man's big framed body on defense provides unique value to his team.",
       "stats": {
@@ -91,7 +91,7 @@
       "nickname": "Mr. Commissioner",
       "position": "QB",
       "overall": 93,
-      "image": "images/wilton-kim.png",
+      "image": "images/wilton.png",
       "playerType": "qb",
       "description": "Horrible commissioner, but a great quarterback and defender.",
       "stats": {
@@ -112,7 +112,7 @@
       "nickname": "Poland",
       "position": "WR",
       "overall": 82,
-      "image": "images/aryan-nair.png",
+      "image": "images/aryan.png",
       "playerType": "wr",
       "description": "Just a guy who wants to play some football. Nuff said.",
       "stats": {
@@ -133,7 +133,7 @@
       "nickname": "Pushoff Merchant",
       "position": "WR",
       "overall": 90,
-      "image": "images/daniel-hsiao.png",
+      "image": "images/daniel.png",
       "playerType": "wr",
       "description": "Abuses his height for a living and bribes the refs. No change of direction, no agility. Horrible on defense.",
       "stats": {
@@ -154,7 +154,7 @@
       "nickname": "Apple sauce",
       "position": "WR",
       "overall": 88,
-      "image": "images/johnny-zhang.png",
+      "image": "images/johnny.png",
       "playerType": "wr",
       "description": "Fast and explosive receiver, but has trouble catching the ball sometimes. Defensive MONSTER though.",
       "stats": {
@@ -175,7 +175,7 @@
       "nickname": "Meat Shield",
       "position": "WR",
       "overall": 69,
-      "image": "images/luke-zhang.png",
+      "image": "images/luke.png",
       "playerType": "wr",
       "description": "His lack of speed and coordination makes him a player with no talent as a receiver and a liability on defense.",
       "stats": {
@@ -196,7 +196,7 @@
       "nickname": "Benson Boone",
       "position": "WR",
       "overall": 90,
-      "image": "images/nelson-wu.png",
+      "image": "images/nelson.png",
       "playerType": "wr",
       "description": "This ultimate sleeper outperforms all of his competition. He excels in the pass rush and makes really explosive plays.",
       "stats": {
@@ -217,7 +217,7 @@
       "nickname": "Comm",
       "position": "WR",
       "overall": 91,
-      "image": "images/rayansh-shah.png",
+      "image": "images/rayansh.png",
       "playerType": "wr",
       "description": "A really friendly guy. Fast and shifty, but teams take advantage of his friendliness, making him a liability on defense.",
       "stats": {
@@ -238,7 +238,7 @@
       "nickname": "Ronnie",
       "position": "WR",
       "overall": 92,
-      "image": "images/ronald-choudhary.png",
+      "image": "images/ronald.png",
       "playerType": "wr",
       "description": "This man brings swagger to the football field through his crispy routes and insane pass rush.",
       "stats": {
@@ -259,7 +259,7 @@
       "nickname": "Masked Killa",
       "position": "WR",
       "overall": 93,
-      "image": "images/sheung-choi.png",
+      "image": "images/sheung.png",
       "playerType": "wr",
       "description": "The Route Technician. He would smoke you in a 1v1... Pretty nice on defense.",
       "stats": {
