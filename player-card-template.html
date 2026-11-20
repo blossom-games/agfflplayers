@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --page: #f8f8f6;
+      --paper: #fff;
+      --ink: #171717;
+      --muted: #777873;
+      --line: #deded9;
+      --green: #13a34a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 54px 28px;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .player-card {
+      background: var(--paper);
+      border: 1px solid #e8e8e3;
+      padding: 30px 34px 26px;
+    }
+
+    .player-top {
+      display: grid;
+      grid-template-columns: 156px minmax(0, 1fr) 130px;
+      gap: 28px;
+      align-items: center;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .portrait-wrap {
+      position: relative;
+      width: 156px;
+      height: 156px;
+      overflow: hidden;
+      border: 1px solid #c9c9c3;
+      border-radius: 5px;
+      background: #ecece8;
+    }
+
+    .portrait-wrap img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .portrait-fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      color: #777873;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .player-heading { min-width: 0; }
+
+    .eyebrow {
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: clamp(30px, 4.3vw, 47px);
+      font-weight: 800;
+      letter-spacing: -.055em;
+      line-height: 1.08;
+      overflow-wrap: anywhere;
+    }
+
+    .position {
+      display: inline-flex;
+      align-items: center;
+      min-height: 27px;
+      margin: 11px 0 0;
+      padding: 3px 9px;
+      border: 1px solid #deded9;
+      border-radius: 3px;
+      color: #33342f;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .035em;
+    }
+
+    .overall-block {
+      align-self: center;
+      justify-self: end;
+      min-width: 96px;
+      text-align: left;
+    }
+
+    .overall-label {
+      display: block;
+      margin-bottom: 1px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .overall-value {
+      display: block;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -.025em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .description-section {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      color: #33342f;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .description {
+      max-width: 940px;
+      margin: 0;
+      color: #666761;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .stats-section { padding-top: 20px; }
+
+    .stats-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .stats-heading .section-title { margin: 0; }
+
+    .scale-note {
+      color: #969791;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .035em;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 20px;
+      row-gap: 20px;
+    }
+
+    .stat {
+      min-width: 0;
+      padding: 1px 0 13px;
+      border-bottom: 1px solid #e5e5e0;
+      text-align: center;
+    }
+
+    .stat-value {
+      display: block;
+      margin-bottom: 1px;
+      color: var(--stat-color);
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 31px;
+      font-weight: 700;
+      line-height: 1.05;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-name {
+      display: block;
+      margin-bottom: 8px;
+      color: #777873;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .meter {
+      height: 4px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: #e4e4e0;
+    }
+
+    .meter-fill {
+      width: var(--stat-width);
+      height: 100%;
+      border-radius: inherit;
+      background: var(--stat-color);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 22px 10px;
+      color: #85867f;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 22px 12px; }
+      .player-card { padding: 19px 18px 20px; }
+      .player-top {
+        grid-template-columns: 112px minmax(0, 1fr);
+        gap: 17px;
+        padding-bottom: 22px;
+      }
+      .portrait-wrap { width: 112px; height: 112px; }
+      .overall-block {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: -5px;
+      }
+      .overall-value { font-size: 37px; }
+      .position { margin-top: 8px; }
+      .description-section { padding: 18px 0 20px; }
+      .stats-grid { column-gap: 14px; row-gap: 15px; }
+    }
+
+    @media (max-width: 420px) {
+      .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <article class="player-card">
+      <header class="player-top">
+        <div class="portrait-wrap">
+          <div class="portrait-fallback" id="portraitFallback">Add your player image file</div>
+          <img id="playerImage" alt="Player image" hidden />
+        </div>
+
+        <div class="player-heading">
+          <p class="eyebrow">Player profile</p>
+          <h1 id="playerName">Player Name</h1>
+          <p class="position" id="playerPosition">Position</p>
+        </div>
+
+        <div class="overall-block">
+          <span class="overall-label">Overall</span>
+          <strong class="overall-value" id="overall">--</strong>
+        </div>
+      </header>
+
+      <section class="description-section" aria-labelledby="descriptionTitle">
+        <h2 class="section-title" id="descriptionTitle">Description</h2>
+        <p class="description" id="description">Add your player description in the PLAYER object near the bottom of this file.</p>
+      </section>
+
+      <section class="stats-section" aria-labelledby="statsTitle">
+        <div class="stats-heading">
+          <h2 class="section-title" id="statsTitle">Player Stats</h2>
+          <span class="scale-note">Ratings out of 100</span>
+        </div>
+        <div class="stats-grid" id="statsGrid"></div>
+      </section>
+    </article>
+  </main>
+
+  <script>
+    /*
+      EDIT YOUR PLAYER HERE
+
+      Keep the image file in the same folder as this HTML file.
+      Example: image: "brock-bowers.png"
+
+      playerType options:
+        "standard" = six common stats
+        "qb"       = common stats + Arm Strength + Accuracy
+        "wr"       = common stats + Route Running + Catching
+
+      Ratings can be any whole number from 0 to 100.
+      Use null to hide a stat.
+    */
+    const PLAYER = {
+      name: "Player Name",
+      position: "Position", // Example: CB, QB, WR, TE, RB
+      overall: 90,
+      image: "player.png",
+      playerType: "standard", // "standard", "qb", or "wr"
+      description: "Write your player description here.",
+
+      stats: {
+        agility: 90,
+        speed: 92,
+        coverage: 85,
+        jump: 88,
+        awareness: 90,
+        passRush: 78,
+
+        // QB-only stats
+        armStrength: 94,
+        accuracy: 89,
+
+        // WR-only stats
+        routeRunning: 91,
+        catching: 93
+      }
+    };
+
+    // The colors move from green (elite) through yellow and orange to red.
+    // There is intentionally no blue rating tier.
+    const RATING_LEVELS = [
+      { min: 90, color: "#13a34a" }, // 90-100: green
+      { min: 80, color: "#75a92c" }, // 80-89: light green
+      { min: 70, color: "#c5a323" }, // 70-79: yellow
+      { min: 60, color: "#df792b" }, // 60-69: orange
+      { min: 0,  color: "#d94343" }  // 0-59: red
+    ];
+
+    const COMMON_STATS = [
+      ["Agility", "agility"],
+      ["Speed", "speed"],
+      ["Coverage", "coverage"],
+      ["Jump", "jump"],
+      ["Awareness", "awareness"],
+      ["Pass Rush", "passRush"]
+    ];
+
+    const QB_STATS = [
+      ["Arm Strength", "armStrength"],
+      ["Accuracy", "accuracy"]
+    ];
+
+    const WR_STATS = [
+      ["Route Running", "routeRunning"],
+      ["Catching", "catching"]
+    ];
+
+    function ratingColor(value) {
+      const rating = Math.max(0, Math.min(100, Number(value)));
+      return RATING_LEVELS.find(level => rating >= level.min).color;
+    }
+
+    function renderPlayer() {
+      document.title = `${PLAYER.name || "Player"} - Player Profile`;
+      document.getElementById("playerName").textContent = PLAYER.name || "Player Name";
+      document.getElementById("playerPosition").textContent = PLAYER.position || "Position";
+      document.getElementById("overall").textContent = PLAYER.overall ?? "--";
+      document.getElementById("description").textContent = PLAYER.description || "";
+
+      const overall = Number(PLAYER.overall);
+      if (Number.isFinite(overall)) {
+        document.getElementById("overall").style.color = ratingColor(overall);
+      }
+
+      const image = document.getElementById("playerImage");
+      const fallback = document.getElementById("portraitFallback");
+      if (PLAYER.image) {
+        image.addEventListener("load", () => {
+          image.hidden = false;
+          fallback.hidden = true;
+        }, { once: true });
+        image.addEventListener("error", () => {
+          image.hidden = true;
+          fallback.hidden = false;
+          fallback.textContent = `Image not found: ${PLAYER.image}`;
+        }, { once: true });
+        image.src = PLAYER.image;
+      }
+
+      let selectedStats = [...COMMON_STATS];
+      if (PLAYER.playerType === "qb") selectedStats = [...selectedStats, ...QB_STATS];
+      if (PLAYER.playerType === "wr") selectedStats = [...selectedStats, ...WR_STATS];
+
+      const grid = document.getElementById("statsGrid");
+      grid.replaceChildren();
+
+      let visibleCount = 0;
+      for (const [label, key] of selectedStats) {
+        const rawValue = PLAYER.stats?.[key];
+        if (rawValue === null || rawValue === undefined || rawValue === "") continue;
+        const value = Number(rawValue);
+        if (!Number.isFinite(value)) continue;
+
+        const safeValue = Math.max(0, Math.min(100, value));
+        const color = ratingColor(safeValue);
+        const item = document.createElement("div");
+        item.className = "stat";
+        item.style.setProperty("--stat-color", color);
+        item.style.setProperty("--stat-width", `${safeValue}%`);
+
+        const rating = document.createElement("strong");
+        rating.className = "stat-value";
+        rating.textContent = safeValue;
+
+        const name = document.createElement("span");
+        name.className = "stat-name";
+        name.textContent = label;
+
+        const meter = document.createElement("div");
+        meter.className = "meter";
+        const fill = document.createElement("div");
+        fill.className = "meter-fill";
+        meter.append(fill);
+
+        item.append(rating, name, meter);
+        grid.append(item);
+        visibleCount++;
+      }
+
+      if (!visibleCount) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "Add ratings in the PLAYER object to display stats here.";
+        grid.append(empty);
+      }
+    }
+
+    renderPlayer();
+  </script>
+</body>
+</html>
