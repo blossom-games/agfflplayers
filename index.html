@@ -1096,6 +1096,73 @@
     }
   </style>
 
+
+  <style id="natural-stat-spacing-fix">
+    /* Keep every rating card aligned, even when a label wraps to two lines. */
+    .key-stats {
+      align-items: stretch;
+      gap: 10px;
+    }
+    .key-stat {
+      min-height: 88px;
+      padding: 12px 13px 11px;
+      gap: 9px;
+      justify-content: space-between;
+    }
+    .key-stat-top {
+      min-height: 31px;
+      align-items: flex-start;
+      gap: 7px;
+    }
+    .key-stat-label {
+      flex: 1 1 auto;
+      max-width: 100%;
+      line-height: 1.25;
+      overflow-wrap: normal;
+      word-break: normal;
+      text-wrap: pretty;
+    }
+    .key-stat-value {
+      flex: 0 0 auto;
+      align-self: flex-start;
+      font-size: 26px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .key-stat-meter { height: 5px; margin-top: auto; }
+
+    /* Remove the overly spread-out feel and use consistent, natural section rhythm. */
+    .player-card {
+      justify-content: flex-start;
+      gap: 0;
+      padding: clamp(20px, 2.5vw, 30px);
+    }
+    .player-top {
+      padding-bottom: 20px;
+      gap: clamp(15px, 2vw, 25px);
+    }
+    .description-section { padding: 15px 0 17px; }
+    .description { line-height: 1.55; }
+    .attributes-section {
+      flex: 1 1 auto;
+      justify-content: flex-start;
+      padding-top: 16px;
+    }
+    .stats-heading { margin-bottom: 12px; }
+
+    @media (max-width: 760px) {
+      .player-card { padding: 18px; }
+      .key-stats { gap: 9px; }
+      .key-stat { min-height: 82px; padding: 11px; }
+      .key-stat-top { min-height: 29px; }
+    }
+    @media (max-width: 420px) {
+      .key-stat { min-height: 78px; padding: 10px; }
+      .key-stat-label { font-size: 10px; }
+      .key-stat-value { font-size: 24px; }
+    }
+  </style>
+
 </head>
 <body>
   <main class="page" id="top">
