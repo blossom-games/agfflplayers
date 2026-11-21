@@ -2282,6 +2282,65 @@
     }
   </style>
 
+
+  <style id="requested-refinements-only">
+    /* Preserve the original profile layout; only update its palette and scale. */
+    :root {
+      color-scheme: dark;
+      --page: #101418; --paper: #1a2229; --ink: #edf2f5;
+      --muted: #9aa7b1; --line: #303c45; --green: #36c878; --green-soft: #183625;
+    }
+    body { background: #101418 !important; color: #edf2f5 !important; }
+    .site-header { background: #171f26 !important; border-bottom-color: #303c45 !important; }
+    .site-brand, h1 { color: #f1f5f7 !important; }
+    .site-nav a, .roster-subtitle, .team-panel-heading span, .eyebrow, .scale-note { color: #a2afb8 !important; }
+    .roster-panel, .team-panel, .player-card { background: #1a2229 !important; border-color: #303c45 !important; box-shadow: 0 3px 14px rgba(0,0,0,.2) !important; color: #edf2f5 !important; }
+    .roster-title, .team-panel-heading h2, .section-title, .stats-heading .section-title { color: #edf2f5 !important; }
+    .search-input, .utility-button, .step-button, .player-tab, .team-tab { background: #202b34 !important; border-color: #3a4852 !important; color: #dce5ea !important; }
+    .search-input::placeholder, .roster-status { color: #9aa7b1 !important; }
+    .filter-tab { color: #b5c0c7 !important; }
+    .filter-tab[aria-selected="true"], .player-tab[aria-selected="true"], .team-tab[aria-selected="true"] { background: #183625 !important; border-color: #326d49 !important; color: #8be0aa !important; }
+    .filter-tabs, .player-top, .description-section, .position-attributes-section { border-color: #303c45 !important; }
+    .portrait-wrap { width: 250px !important; height: 250px !important; background: #25313a !important; border-color: #3a4852 !important; }
+    .player-top { grid-template-columns: 250px minmax(0,1fr) 100px !important; gap: 26px !important; }
+    h1 { font-size: clamp(40px, 5vw, 62px) !important; }
+    .player-meta { align-items: center; }
+    .player-meta .overall-block { margin-left: auto; align-self: center; }
+    .player-meta .player-nickname { flex: 1 0 100%; margin-top: 5px; color: #a7b3bc !important; }
+    .player-meta .player-nickname strong { color: #edf2f5 !important; }
+    .position { background: #25313a !important; border-color: #3a4852 !important; color: #dce5ea !important; }
+    .player-team { background: #183625 !important; border-color: #326d49 !important; color: #8be0aa !important; }
+    .overall-label { color: #a7b3bc !important; }
+    .overall-value { font-size: 68px !important; }
+    .description, .stat-name { color: #b6c1c8 !important; }
+    .key-stat, .attribute-group, .detail-stats { background: #202b34 !important; border-color: #35434d !important; }
+    .key-stat { min-height: 104px; padding: 17px 16px 15px; }
+    .key-stat-label { color: #b6c1c8 !important; font-size: 12px !important; }
+    .key-stat-value { font-size: 32px !important; }
+    .key-stat-meter, .meter { background: #35434d !important; }
+    .attribute-group-title { color: #e5ecef !important; border-bottom-color: #35434d !important; }
+    .stat { border-bottom-color: #35434d !important; }
+    @media (max-width: 900px) {
+      .player-top { grid-template-columns: 190px minmax(0,1fr) 82px !important; gap: 18px !important; }
+      .portrait-wrap { width: 190px !important; height: 190px !important; }
+      .overall-value { font-size: 52px !important; }
+    }
+    @media (max-width: 760px) {
+      .player-top { grid-template-columns: 150px minmax(0,1fr) !important; gap: 17px !important; }
+      .portrait-wrap { width: 150px !important; height: 150px !important; }
+      .player-meta .overall-block { margin-left: 0; }
+      .player-meta .player-nickname { flex-basis: 100%; }
+      .overall-value { font-size: 43px !important; }
+    }
+    @media (max-width: 500px) {
+      .player-top { grid-template-columns: 116px minmax(0,1fr) !important; gap: 13px !important; }
+      .portrait-wrap { width: 116px !important; height: 150px !important; }
+      h1 { font-size: 30px !important; }
+      .overall-value { font-size: 39px !important; }
+      .key-stat { min-height: 94px; padding: 13px 12px 12px; }
+    }
+  </style>
+
 </head>
 <body>
   <main class="page" id="top">
